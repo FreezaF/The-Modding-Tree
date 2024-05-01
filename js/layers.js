@@ -25,6 +25,11 @@ addLayer("b", {
         if (hasUpgrade('d', 11)) num = player[this.layer].points?0.1:0
         return num
     },
+    doReset(resettingLayer) {
+            let keep = [];
+            if (hasMilestone("d", 2) && resettingLayer=="d") keep.push("milestones")
+            if (layers[resettingLayer].row > this.row) layerDataReset("p", keep)
+        },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
     },
@@ -99,7 +104,7 @@ addLayer("d", {
         },
         2: {
             requirementDescription: "10 Duck",
-            done() { return player.d.points.gte(1) },
+            done() { return player.d.points.gte(10) },
             effectDescription: "Keep Bread Milestones On Reset",
         },
     }
