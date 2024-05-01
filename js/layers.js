@@ -27,7 +27,6 @@ addLayer("b", {
         {key: "b", description: "B: Make Slice Of Bread", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return true},
-    doReset
     milestones: {
         1: {
             requirementDescription: "5 Bread",
