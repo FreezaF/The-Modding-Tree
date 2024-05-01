@@ -16,7 +16,8 @@ addLayer("b", {
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasMilestone('b', 1)) mult = mult.times(2)
-        mult = mult.times(player["d"].points.pow(0.5))
+        if(player["d"].points>=1)
+            mult = mult.times(player["d"].points.pow(1.25))
         return mult
     },
     passiveGeneration() {
@@ -61,7 +62,7 @@ addLayer("d", {
     }},
     color: "#668b61",
     effectDescription() {
-        return "Which are boosting Bread Gain By "+format(player["d"].points.pow(0.5))+x
+        return "Which are boosting Bread Gain By "+format(player["d"].points.pow(1.25))+x
     },
     canBuyMax() { return hasMilestone("d", 1) },
     branches: ["b"],
@@ -95,6 +96,11 @@ addLayer("d", {
             requirementDescription: "1 Duck",
             done() { return player.d.points.gte(1) },
             effectDescription: "You Can Buy Max Ducks",
+        },
+        2: {
+            requirementDescription: "10 Duck",
+            done() { return player.d.points.gte(1) },
+            effectDescription: "Keep Bread Milestones On Reset",
         },
     }
 })
