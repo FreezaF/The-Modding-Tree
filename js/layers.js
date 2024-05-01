@@ -34,9 +34,9 @@ addLayer("b", {
             effectDescription: "Bread Gain is Doubled",
         },
         2: {
-            requirementDescription: "15 Bread",
+            requirementDescription: "25 Bread",
             done() { return player.b.points.gte(15) },
-            effectDescription: "Bread Doubles point gain",
+            effectDescription: "Double point gain",
         },
         3: {
             requirementDescription: "100 Bread",
