@@ -28,7 +28,7 @@ addLayer("b", {
     doReset(resettingLayer) {
             let keep = [];
             if (hasMilestone("d", 2) && resettingLayer=="d") keep.push("milestones")
-            if (layers[resettingLayer].row > this.row) layerDataReset("p", keep)
+            if (layers[resettingLayer].row > this.row) layerDataReset("b", keep)
         },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
