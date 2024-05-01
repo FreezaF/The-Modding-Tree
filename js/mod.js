@@ -41,8 +41,9 @@ function canGenPoints(){
 function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
-
 	let gain = new Decimal(1)
+	if (hasMilestone('b', 2)) gain = gain.times(2)
+	if (hasMilestone('b', 3)) gain = gain.times(player.b.points.add(1).pow(0.5))
 	return gain
 }
 
