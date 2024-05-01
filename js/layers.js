@@ -19,6 +19,11 @@ addLayer("b", {
 
         return mult
     },
+    passiveGeneration() {
+        num = new Decimal(0)
+        if (hasUpgrade('d', 11)) num = player[this.layer].points?0.1:0
+        return num
+    },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
     },
@@ -55,6 +60,7 @@ addLayer("d", {
 		points: new Decimal(0),
     }},
     color: "#668b61",
+    canBuyMax() { return hasMilestone("d", 1) },
     branches: ["b"],
     requires: new Decimal(1), // Can be a function that takes requirement increases into account
     resource: "Plumps Of Ducks", // Name of prestige currency
@@ -73,5 +79,19 @@ addLayer("d", {
     hotkeys: [
         {key: "d", description: "D: Capture A Duck", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return true}
+    layerShown(){return true},
+    upgrades: {
+        11: {
+            title: "Baker Ducks!",
+            description: "Gain 10% of Bread Gain",
+            cost: new Decimal(50),
+        }
+    },
+    milestones: {
+        1: {
+            requirementDescription: "1 Duck",
+            done() { return player.d.points.gte(1) },
+            effectDescription: "You Can Buy Max Ducks",
+        },
+    }
 })
