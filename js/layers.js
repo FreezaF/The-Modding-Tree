@@ -16,7 +16,7 @@ addLayer("b", {
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
         if (hasMilestone('b', 1)) mult = mult.times(2)
-
+        mult = mult.times(player["d"].points.pow(0.5))
         return mult
     },
     passiveGeneration() {
@@ -60,6 +60,9 @@ addLayer("d", {
 		points: new Decimal(0),
     }},
     color: "#668b61",
+    effectDescription() {
+        return "Which are boosting Bread Gain By "+format(player["d"].points.pow(0.5))+x
+    },
     canBuyMax() { return hasMilestone("d", 1) },
     branches: ["b"],
     requires: new Decimal(1), // Can be a function that takes requirement increases into account
